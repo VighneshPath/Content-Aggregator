@@ -86,7 +86,7 @@ def mdcomp(soup, part_name):
             link = item.h4.a['href'].strip()
             flag = 0
             for word in part_name.split(" "):
-                if(word not in title.lower()):
+                if(word not in title.lower().split()):
                     flag = 1
                     break
             if(flag == 0):
@@ -110,7 +110,7 @@ def amazon(soup, part_name):
             link ="https://amazon.in"+item.find("a",{"class":"a-link-normal a-text-normal"})['href'].strip()
             flag = 0
             for word in part_name.split(" "):
-                if(word not in title.lower()):
+                if(word not in title.lower().split()):
                     flag = 1
                     break
             if(flag == 0):
@@ -137,7 +137,7 @@ def vedcomp(soup, part_name):
             link = item.find("h4",{"class":"name"}).a['href']
             flag = 0
             for word in part_name.split(" "):
-                if(word not in title.lower()):
+                if(word not in title.lower().split()):
                     flag = 1
                     break
             if(flag == 0):
@@ -167,7 +167,7 @@ def primeabgb(soup, part_name):
             link = item.h3.a['href'].strip()
             flag = 0
             for word in part_name.split(" "):
-                if(word not in title.lower()):
+                if(word not in title.lower().split()):
                     flag = 1
                     break
             if(flag == 0):
@@ -216,4 +216,4 @@ if __name__ == '__main__':
     part_list = get_part(part_name)
     part_list = sort_according_to_price(part_list)
     for part in part_list:
-        print(part.title, part.price, part.site[:40])
+        print(part.title, part.price, part.site)
