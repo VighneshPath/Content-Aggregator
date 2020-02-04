@@ -3,6 +3,7 @@ A Simple Product Price Comparison Content Aggregator
 
 # Function
 The Program Currently Checks Products and their prices available on the following websites:-
+
   -mdcomputers.in
   
   -amazon.in
@@ -13,6 +14,7 @@ The Program Currently Checks Products and their prices available on the followin
  
  # To Use Program
  Follow the steps given:-
+ 
   -On Command Prompt type git clone https://github.com/VighneshPath/Content-Aggregator
   
   -Type pip install requests
