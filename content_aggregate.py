@@ -8,7 +8,7 @@ comp_parts_sites = {
 }
 
 headers ={
-'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36'
+"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
 }
 
 class Part():
@@ -101,7 +101,6 @@ def amazon(soup, part_name):
     It returns a list of Part objects satisfying the part name
     It takes Arguments BeautifulSoup object of amazon.in part search, part name
     '''
-    soup = BeautifulSoup(soup.prettify(),"html.parser")
     results = soup.findAll("div", {"class":"a-section a-spacing-medium"})
     part_list = []
     for item in results:
