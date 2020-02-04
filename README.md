@@ -15,7 +15,7 @@ The Program Currently Checks Products and their prices available on the followin
  # To Use Program
  Follow the steps given:-
  
-  -On Command Prompt type git clone https://github.com/VighneshPath/Content-Aggregator
+  -On Command Prompt type git clone https://github.com/VighneshPath/Content-Aggregator.git
   
   -Type pip install requests
   
