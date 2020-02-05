@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import threading
 
 comp_parts_sites = {
     "%20":[("vedantcomputers","https://www.vedantcomputers.com/index.php?route=product/search&search=")],
@@ -176,20 +177,35 @@ def primeabgb(soup, part_name):
             continue
     return part_list
 
+def get_site_part_list(a_site, part, space_separator,site_part_list):
+    '''
+    A function to get a list of specified part on the a_site website
+    It takes 4 Arguments sitename, partname, space separator for the site and site_part_list
+    '''
+    search_url = get_search_url(part, a_site, space_separator)
+    url_soup = get_soup(search_url)
+    site_part_list.extend(site_func(a_site, part, url_soup))
+    return
+
 def get_part(part):
     '''
     A function to get All the Part details from the respectives websites
-    It returns list of all the Part Objects from various websitespython continue
+    It returns list of all the Part Objects from various websites
     It takes one argument of part name
     '''
-    parts_list = []
+    #A list to store All the list of Part Objects
+    sites_part_list = []
+    #Creating List for Storing Threads for each site
+    threads = []
     for space_separator,url in comp_parts_sites.items():
         for a_site in url:
-            search_url = get_search_url(part, a_site, space_separator)
-            url_soup = get_soup(search_url)
-            site_part_list = site_func(a_site, part, url_soup)
-            parts_list.extend(site_part_list)
-    return parts_list
+            thread_obj = threading.Thread(target = get_site_part_list, args = [a_site, part, space_separator, sites_part_list])
+            threads.append(thread_obj)
+            thread_obj.start()
+    for thread in threads:
+        #Waiting for all the threads to complete
+        thread.join()
+    return sites_part_list
 
 def sort_according_to_price(part_list):
     '''
