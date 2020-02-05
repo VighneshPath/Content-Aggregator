@@ -36,7 +36,7 @@ def get_soup(url):
     '''
     response = requests.get(url, headers = headers)
     if(response.status_code == requests.codes.ok):
-        return (BeautifulSoup(response.text,"html.parser"))
+        return (BeautifulSoup(response.text,"lxml"))
     else:
         return
 
