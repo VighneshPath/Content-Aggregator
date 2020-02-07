@@ -226,16 +226,15 @@ def sort_according_to_price(part_list):
 
 
 if __name__ == '__main__':
-    print("Enter Part Name")
-    part_name = input()
+    part_name = input("Enter part name: ")
     start_time = time.time()
     part_name = part_name.lower()
     part_list = get_part(part_name)
     part_list = sort_according_to_price(part_list)
     if(part_list == []):
-        print("No Part Name",part_name,"Found")
+        prin("No part named '{}' was found!".format(part_name))
     for part in part_list:
-        print("\n\n")
-        print(part.title, part.price, part.site)
-    print("\n\n")
+        print("\n")
+        print("Part name: {}\nPrice: {}\nWebsite: {}".format(part.title, part.price, part.site))
+    print("\n")
     print("Time Taken", time.time()-start_time)
