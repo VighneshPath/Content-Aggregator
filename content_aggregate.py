@@ -232,7 +232,7 @@ if __name__ == '__main__':
     part_list = get_part(part_name)
     part_list = sort_according_to_price(part_list)
     if(part_list == []):
-        prin("No part named '{}' was found!".format(part_name))
+        print("No part named '{}' was found!".format(part_name))
     for part in part_list:
         print("\n")
         print("Part name: {}\nPrice: {}\nWebsite: {}".format(part.title, part.price, part.site))
