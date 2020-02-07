@@ -29,7 +29,7 @@ class Part():
             return 0
 
     def __str__(self):
-        return (self.title, self.price, self.site)
+        return("Part name: {}\nPrice: {}\nWebsite: {}".format(self.title, self.price, self.site))
 
 
 def get_soup(url):
@@ -236,6 +236,6 @@ if __name__ == '__main__':
         print("No part named '{}' was found!".format(part_name))
     for part in part_list:
         print("\n")
-        print("Part name: {}\nPrice: {}\nWebsite: {}".format(part.title, part.price, part.site))
+        print(part)
     print("\n")
     print("Time Taken", time.time()-start_time)
