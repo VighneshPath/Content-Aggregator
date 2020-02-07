@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from dataclasses import dataclass
 import time
 import threading
 
@@ -12,14 +13,14 @@ headers ={
 "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
 }
 
+@dataclass
 class Part():
     '''
     Class to Represent a Part from a given website
     '''
-    def __init__(self, title, price, site):
-        self.title = title
-        self.price = price
-        self.site = site
+    title:str
+    price:str
+    site:str
 
     def get_price(self):
         try:
