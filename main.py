@@ -29,7 +29,7 @@ class Part():
             return 0
 
     def __str__(self):
-        return("Part name: {}\nPrice: {}\nWebsite: {}".format(self.title, self.price, self.site))
+        return(f"Part name: {self.title}\nPrice: {self.price}\nWebsite: {self.site}")
 
 
 def get_soup(url):
@@ -229,11 +229,11 @@ def sort_according_to_price(part_list):
 if __name__ == '__main__':
     part_name = input("Enter part name: ")
     start_time = time.time()
-    part_name = part_name.lower()
+    part_name = part_name.strip().lower()
     part_list = get_part(part_name)
     part_list = sort_according_to_price(part_list)
     if(part_list == []):
-        print("No part named '{}' was found!".format(part_name))
+        print(f"No part named '{part_name}' was found!")
     for part in part_list:
         print("\n")
         print(part)
