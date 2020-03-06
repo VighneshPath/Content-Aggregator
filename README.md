@@ -23,5 +23,5 @@ The Program Currently Checks Products and their prices available on the followin
   
     -Type pip install lxml
   
-    -Open contentate_aggregate.py and run it
+    -Open contentate_aggregator.py and run it
  
