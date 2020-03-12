@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+
+{%block head%}
+content aggregator
+{%endblock%}
+
+
+{%block body%}
+<h2>Enter Part Name for {{category}}:</h2>
+<form action = "{{url_for('getparts')}}" method = "POST">
+    <input class="form-control form-control-lg" type="text" placeholder="Part Name" name = "partname">
+    <button type="submit" class="btn btn-dark">Submit</button>
+</form>
+{%endblock%}

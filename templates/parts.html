@@ -1,0 +1,15 @@
+{%extends "layout.html"%}
+
+{%block head%}
+content aggregator
+{%endblock%}
+
+
+{%block body%}
+<ul>
+    {% for part in part_list%}
+        <h3><a href="{{part.link}}">{{part.title}}</a></h3>
+        <h2>{{part.price}}</h2>
+    {% endfor %}
+</ul>
+{%endblock%}

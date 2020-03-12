@@ -1,0 +1,22 @@
+{%extends "layout.html"%}
+
+{%block head%}
+content aggregator
+{%endblock%}
+
+
+{%block body%}
+<h3>Choose Part Category</h3>
+<!-- <div class="list-group">
+  <a href="{{url_for('enterpart')}}" value = "Computer Parts" name = "Category_Option" class="list-group-item list-group-item-action">Computer Parts</a>
+  <a href="{{url_for('enterpart')}}" value = "Mobiles" name = "Category_Option" class="list-group-item list-group-item-action">Mobiles</a>
+</div> -->
+<form action = "{{url_for('enterpart')}}" method = "post">
+    <div class = "form-group">
+        <div class="list-group">
+            <button type="submit" class="list-group-item list-group-item-action" value = "Computer Parts" name = "Category_Option">Computer Parts</button>
+            <button type="submit" class="list-group-item list-group-item-action" value = "Mobiles" name = "Category_Option">Mobiles</button>
+        </div>
+    </div>
+</form>
+{%endblock%}
