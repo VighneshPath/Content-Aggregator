@@ -1,22 +1,30 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 import content_aggregator
 
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/part", methods = ["POST"])
+@app.route("/part", methods = ["POST", "GET"])
 def enterpart():
-    global category
-    category = request.form.get("Category_Option")
-    return render_template("part.html",category = category)
+    if(request.method == "GET"):
+        return render_template("error.html", message = "Request Method Get Not Allowed, Please Enter Part Category in previous Page")
+    session["category"] = request.form.get("Category_Option")
+    return render_template("part.html",category = session["category"])
 
-@app.route("/getparts", methods = ["POST"])
+@app.route("/getparts", methods = ["POST", "GET"])
 def getparts():
-    global part_name
-    part_name = request.form.get("partname")
-    part_list = content_aggregator.get_part_details(part_name,category)
+    if(request.method == "GET"):
+        return render_template("error.html", message = "Request Method Get Not Allowed, Please Enter Part Name in previous Page")
+    session["part_name"] = request.form.get("partname")
+    part_list = content_aggregator.get_part_details(session["part_name"],session["category"])
+    if(part_list == []):
+        return render_template("error.html", message = f'No Part Named {session["part_name"]} Found')
     return render_template("parts.html", part_list = part_list)
 
