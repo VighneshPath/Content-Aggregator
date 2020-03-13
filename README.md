@@ -17,11 +17,14 @@ The Program Currently Checks Products and their prices available on the followin
  
     -On Command Prompt type git clone https://github.com/VighneshPath/Content-Aggregator.git
   
-    -Type pip install requests
-  
-    -Type pip install bs4
-  
-    -Type pip install lxml
-  
-    -Open contentate_aggregator.py and run it
+    -Then Install all dependencies by typing: 
+    
+        pip install -r requirements.txt
+        
+    -To run the application type: 
+        
+        flask run 
+    
+    -Copy the Static Ip and paste it into the Browser
+    
  
