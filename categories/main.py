@@ -69,14 +69,17 @@ def sort_according_to_price(part_list):
 
 def get_part_list(part_name, part_cat):
     if(part_cat == "Computer Parts"):
-        import Categories.computer_parts
-        file = Categories.computer_parts
+        import categories.computer_parts
+        file = categories.computer_parts
     elif(part_cat == "Mobiles"):
-        import Categories.mobile
-        file = Categories.mobile
+        import categories.mobile
+        file = categories.mobile
     elif(part_cat == "Headphones"):
-        import Categories.headphones
-        file = Categories.headphones
+        import categories.headphones
+        file = categories.headphones
+    elif(part_cat == "Furniture"):
+        import categories.furniture
+        file = categories.furniture
     #A list to store All the list of Part Objects
     sites_part_list = []
     #Creating List for Storing Threads for each site

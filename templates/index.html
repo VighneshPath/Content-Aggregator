@@ -6,17 +6,21 @@ content aggregator
 
 
 {%block body%}
-<h3>Choose Part Category</h3>
-<!-- <div class="list-group">
-  <a href="{{url_for('enterpart')}}" value = "Computer Parts" name = "Category_Option" class="list-group-item list-group-item-action">Computer Parts</a>
-  <a href="{{url_for('enterpart')}}" value = "Mobiles" name = "Category_Option" class="list-group-item list-group-item-action">Mobiles</a>
-</div> -->
-<form action = "{{url_for('enterpart')}}" method = "post">
-    <div class = "form-group">
-        <div class="list-group">
-            <button type="submit" class="list-group-item list-group-item-action" value = "Computer Parts" name = "Category_Option">Computer Parts</button>
-            <button type="submit" class="list-group-item list-group-item-action" value = "Mobiles" name = "Category_Option">Mobiles</button>
+    <h1>Enter Part Details</h1>
+    <form action = "{{url_for('getparts')}}" method = "post">
+        <div class="form-group">
+            <label for="category">Part Category</label>
+            <select class = "form-control" id = "category" placeholder = "Part Category"name = "Category_Option">
+                <option value = "Computer Parts">Computer Parts</option>
+                <option value = "Mobiles">Mobiles</option>
+                <option value = "Headphones">Headphones</option>
+                <option value = "Furniture">Furniture</option>
+            </select>
         </div>
-    </div>
-</form>
+        <div class="form-group">
+            <label for="name">Part Name</label>
+            <input type="text" class="form-control form-control-lg" id="name" placeholder="Part Name" name = "partname" autocomplete = "off">
+        </div>
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
 {%endblock%}

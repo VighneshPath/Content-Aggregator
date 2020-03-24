@@ -1,5 +1,5 @@
 import time
-from Categories import main
+from categories import main
 
 def get_part_details(part_name, part_cat):
     part_name = part_name.strip().lower()

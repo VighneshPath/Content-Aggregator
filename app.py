@@ -11,17 +11,11 @@ Session(app)
 def index():
     return render_template("index.html")
 
-@app.route("/part", methods = ["POST", "GET"])
-def enterpart():
-    if(request.method == "GET"):
-        return render_template("error.html", message = "Request Method Get Not Allowed, Please Enter Part Category in previous Page")
-    session["category"] = request.form.get("Category_Option")
-    return render_template("part.html",category = session["category"])
-
 @app.route("/getparts", methods = ["POST", "GET"])
 def getparts():
     if(request.method == "GET"):
         return render_template("error.html", message = "Request Method Get Not Allowed, Please Enter Part Name in previous Page")
+    session["category"] = request.form.get("Category_Option")
     session["part_name"] = request.form.get("partname")
     part_list = content_aggregator.get_part_details(session["part_name"],session["category"])
     if(part_list == []):
