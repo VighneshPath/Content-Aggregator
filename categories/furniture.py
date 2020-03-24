@@ -45,10 +45,10 @@ def flipkart(soup,part_name):
                 if(product not in title):
                     f=0
                     break
-        if(f==0):
+            if(f==0):
               part_list.append((title,price,link))   
-    except:
-        continue
+        except:
+            continue
     return part_list
 
 
