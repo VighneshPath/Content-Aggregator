@@ -25,7 +25,7 @@ def amazon(soup,part_name):
             f=0
             for product in part_name:
                 if(product not in title):
-                    f=0
+                    f=1
                     break
             if(f==0):
                 part_list.append((title,price,link))   
@@ -43,7 +43,7 @@ def flipkart(soup,part_name):
             f=0
             for product in part_name:
                 if(product not in title):
-                    f=0
+                    f=1
                     break
             if(f==0):
               part_list.append((title,price,link))   
