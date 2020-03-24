@@ -2,7 +2,7 @@
 A Simple Product Price Comparison Content Aggregator
 
 # Function
-The Program Currently Checks Products and their prices available on the following websites:-
+The Program Currently Checks Products and their prices available on the following websites based on the categories:-
 
     -mdcomputers.in
   
