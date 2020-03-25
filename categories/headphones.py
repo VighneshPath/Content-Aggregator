@@ -28,7 +28,6 @@ def scrape_site(site, part_name, soup):
 def heaphonezone(soup , part_name):
 
 	results = soup.find_all("div" , {"class":"product-wrap"})
-	print(results)
 
 	for item in results:
 		try:
@@ -46,7 +45,7 @@ def heaphonezone(soup , part_name):
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                    flag = 1
+					flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
@@ -83,7 +82,7 @@ def flipkart(soup , part_name):
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                    flag = 1
+                	flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
@@ -107,23 +106,19 @@ def snapdeal(soup , part_name):
 			result = item.find("div" , {"class":"product-desc-rating"})
 
 			title = result.a.p.get_text().strip()
-			print(title)
 
 			price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
-			print(price)
 
 		# 	img_ = item.find("img" , {"class":"product-image"})
 		# 	img = img_["src"]
-		# 	print(img)
 
 			link = result.a["href"]
-			print(link)
 
 			flag = 0
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                    flag = 1
+					flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
@@ -147,19 +142,16 @@ def ebay(soup , part_name):
 	for result in results:
 		try:
 			title = result.find("h3" , {"class":"s-item__title"}).get_text().strip()
-			print(title)
 
 			price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
-			print(price)
 
 			link = result.find("a" , {"class":"s-item__link"})["href"]
-			print(link)
 			
 			flag = 0
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                    flag = 1
+					flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
