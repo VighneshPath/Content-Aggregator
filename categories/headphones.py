@@ -1,30 +1,20 @@
-'''
-1. Sennheiser
-2. Headhonezone
-3. Bajjao
-'''
-
-
 from bs4 import BeautifulSoup
 import requests
 
 headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0"}
 
-headers = headers
-
-
-#BAJAAO
-
-# url = "https://www.bajaao.com/pages/findify-search-results?q=headphones"
-
-# html = requests.get(url)
-
-# soup = BeautifulSoup(html.text , "html.parser")
-
-# results = soup.find_all("div" , {"class":"findify-components-common--grid_column"})
-# print(results)
-
-
+def scrape_site(site, part_name, soup):
+    
+    if(site == "headphonezone"):
+        site = headphonezone
+    elif(site == "flipkart"):
+        site = flipkart
+    elif(site == "snapdeal"):
+        site = snapdeal
+    elif(site == "ebay"):
+        site = ebay
+    part_list = site(soup, part_name)
+    return part_list
 
 
 # #HEADPHONEZONE
@@ -35,27 +25,36 @@ headers = headers
 
 # soup = BeautifulSoup(html.text , "html.parser")
 
-# results = soup.find_all("div" , {"class":"product-wrap"})
-# print(results)
+def heaphonezone(soup , part_name):
 
-# for item in results:
-# 	try:
-# 		result = item.find("div" , {"class":"product-details"})
+	results = soup.find_all("div" , {"class":"product-wrap"})
+	print(results)
 
-# 		title = result.find("span" , {"class":"title"})
-# 		print(title.text)
+	for item in results:
+		try:
+			result = item.find("div" , {"class":"product-details"})
 
-# 		price = result.find("span" , {"class":"money"})
-# 		print(price.text)
+			title = result.find("span" , {"class":"title"})
 
-# 		link = item.a["href"]
-# 		print(link)
+			price = result.find("span" , {"class":"money"})
 
-# 		img = item.div.a["href"]
-# 		print(img)
-# 	except:
-# 		continue
+			link = item.a["href"]
 
+			img = item.div.a["href"]
+
+			flag = 0
+
+			for word in part_name.split(" "):
+                if(word not in title.lower().split()):
+                    flag = 1
+                    break
+            if(flag == 0):
+                part_list.append((title,price,link))
+
+		except:
+			continue
+
+	return part_list
 
 # # FLIPKART
 
@@ -64,25 +63,33 @@ headers = headers
 # html = requests.get(url)
 
 # soup = BeautifulSoup(html.text , "html.parser")
+def flipkart(soup , part_name):
 
-# results = soup.find_all("div" , {"class":"_3liAhj"})
-# # print(results)
+	results = soup.find_all("div" , {"class":"_3liAhj"})
 
-# for result in results:
-# 	try:
-# 		title = result.find("a" , {"class":"_2cLu-l"}).get_text().strip()
-# 		print(title)
+	for result in results:
+		try:
+			title = result.find("a" , {"class":"_2cLu-l"}).get_text().strip()
 
-# 		price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()
-# 		print(price)
+			price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()
 
-# 		link_ = result.find("a" , {"class":"Zhf2z-"})
-# 		link = link_["href"]
-# 		print(link)
+			link_ = result.find("a" , {"class":"Zhf2z-"})
+			link = link_["href"]
+			
+			# img = result.find()
 
-# 		img = result.find()
-# 	except:
-# 		continue
+			flag = 0
+
+			for word in part_name.split(" "):
+                if(word not in title.lower().split()):
+                    flag = 1
+                    break
+            if(flag == 0):
+                part_list.append((title,price,link))
+
+		except:
+			continue
+	return part_list
 
 # # SANPDEAL
 
@@ -91,52 +98,76 @@ headers = headers
 # html = requests.get(url)
 
 # soup = BeautifulSoup(html.text , "html.parser")
+def snapdeal(soup , part_name):
 
-# results = soup.find_all("div" , {"class":"product-tuple-description"})
+	results = soup.find_all("div" , {"class":"product-tuple-description"})
 
-# for item in results:
-# 	try:
-# 		result = item.find("div" , {"class":"product-desc-rating"})
+	for item in results:
+		try:
+			result = item.find("div" , {"class":"product-desc-rating"})
 
-# 		title = result.a.p.get_text().strip()
-# 		print(title)
+			title = result.a.p.get_text().strip()
+			print(title)
 
-# 		price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
-# 		print(price)
+			price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
+			print(price)
 
-# 	# 	img_ = item.find("img" , {"class":"product-image"})
-# 	# 	img = img_["src"]
-# 	# 	print(img)
+		# 	img_ = item.find("img" , {"class":"product-image"})
+		# 	img = img_["src"]
+		# 	print(img)
 
-# 		link = result.a["href"]
-# 		print(link)
-# 	except:
-# 		continue
+			link = result.a["href"]
+			print(link)
+
+			flag = 0
+
+			for word in part_name.split(" "):
+                if(word not in title.lower().split()):
+                    flag = 1
+                    break
+            if(flag == 0):
+                part_list.append((title,price,link))
+
+		except:
+			continue
+
+	return part_list
 
 # # EBAY
 
-url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=headphones&_sacat=0"
+# url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=headphones&_sacat=0"
 
-html = requests.get(url)
+# html = requests.get(url)
 
-soup = BeautifulSoup(html.text , "html.parser")
+# soup = BeautifulSoup(html.text , "html.parser")
 
-results = soup.find_all("div" , {"class":"s-item__wrapper clearfix"})
+def ebay(soup , part_name):
 
-for result in results:
-	try:
-		title = result.find("h3" , {"class":"s-item__title"}).get_text().strip()
-		print(title)
+	results = soup.find_all("div" , {"class":"s-item__wrapper clearfix"})
 
-		price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
-		print(price)
+	for result in results:
+		try:
+			title = result.find("h3" , {"class":"s-item__title"}).get_text().strip()
+			print(title)
 
-		link = result.find("a" , {"class":"s-item__link"})["href"]
-		print(link)
-		
-	except:
-		continue
+			price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
+			print(price)
 
+			link = result.find("a" , {"class":"s-item__link"})["href"]
+			print(link)
+			
+			flag = 0
 
+				for word in part_name.split(" "):
+	                if(word not in title.lower().split()):
+	                    flag = 1
+	                    break
+	            if(flag == 0):
+	                part_list.append((title,price,link))
+
+		except:
+			continue
+
+	return part_list
 
 
