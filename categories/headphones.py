@@ -45,11 +45,12 @@ def heaphonezone(soup , part_name):
 			flag = 0
 
 			for word in part_name.split(" "):
-                if(word not in title.lower().split()):
+				if(word not in title.lower().split()):
                     flag = 1
-                    break
-            if(flag == 0):
-                part_list.append((title,price,link))
+					break
+				if(flag == 0):
+					part_list.append((title,price,link))
+							
 
 		except:
 			continue
@@ -81,12 +82,11 @@ def flipkart(soup , part_name):
 			flag = 0
 
 			for word in part_name.split(" "):
-                if(word not in title.lower().split()):
+				if(word not in title.lower().split()):
                     flag = 1
-                    break
-            if(flag == 0):
-                part_list.append((title,price,link))
-
+					break
+				if(flag == 0):
+					part_list.append((title,price,link))
 		except:
 			continue
 	return part_list
@@ -122,12 +122,11 @@ def snapdeal(soup , part_name):
 			flag = 0
 
 			for word in part_name.split(" "):
-                if(word not in title.lower().split()):
+				if(word not in title.lower().split()):
                     flag = 1
-                    break
-            if(flag == 0):
-                part_list.append((title,price,link))
-
+					break
+				if(flag == 0):
+					part_list.append((title,price,link))
 		except:
 			continue
 
@@ -158,12 +157,12 @@ def ebay(soup , part_name):
 			
 			flag = 0
 
-				for word in part_name.split(" "):
-	                if(word not in title.lower().split()):
-	                    flag = 1
-	                    break
-	            if(flag == 0):
-	                part_list.append((title,price,link))
+			for word in part_name.split(" "):
+				if(word not in title.lower().split()):
+                    flag = 1
+					break
+				if(flag == 0):
+					part_list.append((title,price,link))
 
 		except:
 			continue
