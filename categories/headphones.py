@@ -1,10 +1,5 @@
-from bs4 import BeautifulSoup
-import requests
-
-headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0"}
-
 def scrape_site(site, part_name, soup):
-    
+
     if(site == "headphonezone"):
         site = headphonezone
     elif(site == "flipkart"):
@@ -49,7 +44,7 @@ def heaphonezone(soup , part_name):
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
-							
+
 
 		except:
 			continue
@@ -75,19 +70,22 @@ def flipkart(soup , part_name):
 
 			link_ = result.find("a" , {"class":"Zhf2z-"})
 			link = link_["href"]
-			
+
 			# img = result.find()
 
 			flag = 0
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                	flag = 1
+					flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
+
+
 		except:
 			continue
+
 	return part_list
 
 # # SANPDEAL
@@ -146,7 +144,7 @@ def ebay(soup , part_name):
 			price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
 
 			link = result.find("a" , {"class":"s-item__link"})["href"]
-			
+
 			flag = 0
 
 			for word in part_name.split(" "):
