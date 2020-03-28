@@ -91,7 +91,7 @@ def flipkart(soup , part_name):
 
 			for word in part_name.split(" "):
 				if(word not in title.lower().split()):
-                	flag = 1
+					flag = 1
 					break
 				if(flag == 0):
 					part_list.append((title,price,link))
@@ -129,45 +129,45 @@ def snapdeal(soup , part_name):
 				if(word not in title.lower().split()):
 					flag = 1
 					break
-				if(flag == 0):
+				if flag == 0:
 					part_list.append((title,price,link))
 		except:
 			continue
 
 	return part_list
 
-# # EBAY
+# # # EBAY
 
-# url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=headphones&_sacat=0"
+# # url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=headphones&_sacat=0"
 
-# html = requests.get(url)
+# # html = requests.get(url)
 
-# soup = BeautifulSoup(html.text , "html.parser")
+# # soup = BeautifulSoup(html.text , "html.parser")
 
-def ebay(soup , part_name):
+# def ebay(soup , part_name):
 
-	results = soup.find_all("div" , {"class":"s-item__wrapper clearfix"})
+# 	results = soup.find_all("div" , {"class":"s-item__wrapper clearfix"})
 
-	for result in results:
-		try:
-			title = result.find("h3" , {"class":"s-item__title"}).get_text().strip()
+# 	for result in results:
+# 		try:
+# 			title = result.find("h3" , {"class":"s-item__title"}).get_text().strip()
 
-			price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
+# 			price = result.find("div" , {"class":"s-item__detail s-item__detail--primary"}).span.get_text().strip()
 
-			link = result.find("a" , {"class":"s-item__link"})["href"]
+# 			link = result.find("a" , {"class":"s-item__link"})["href"]
 			
-			flag = 0
+# 			flag = 0
 
-			for word in part_name.split(" "):
-				if(word not in title.lower().split()):
-					flag = 1
-					break
-				if(flag == 0):
-					part_list.append((title,price,link))
+# 			for word in part_name.split(" "):
+# 				if(word not in title.lower().split()):
+# 					flag = 1
+# 					break
+# 				if flag == 0:
+# 					part_list.append((title,price,link))
 
-		except:
-			continue
+# 		except:
+# 			continue
 
-	return part_list
+# 	return part_list
 
 
