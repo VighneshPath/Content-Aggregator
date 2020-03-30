@@ -58,22 +58,22 @@ def flipkart(soup,part_name):
 
 def pepperfry(soup,part_name):
     results = soup.findAll("div",{"class":"pf-col srchrslt-crd-10x11 srch-rslt-cards pf-margin-bottom20 clipprods"})
-part_list=[]
-for item in results:
-    try:
-        title=(item.find("a",{"class":"clip-prd-dtl"}).text)
-        link="https://www.pepperfry.com/"+(item.find("a",{"class":"clip-prd-dtl"})['href'])
-        price = (item.find("div",{"class":"clip-price-blocks row"}).find("span",{"class":"clip-offr-price"}).text.strip())
-        f=0
-        for product in part_name:
-            if(product not in title):
-                f=1
-                break
-        if(f==0):
-            part_list.append((title,price,link))
-    except:
-        continue
-print(part_list) 
+    part_list=[]
+    for item in results:
+        try:
+            title=(item.find("a",{"class":"clip-prd-dtl"}).text)
+            link="https://www.pepperfry.com/"+(item.find("a",{"class":"clip-prd-dtl"})['href'])
+            price = (item.find("div",{"class":"clip-price-blocks row"}).find("span",{"class":"clip-offr-price"}).text.strip())
+            f=0
+            for product in part_name:
+                if(product not in title):
+                    f=1
+                    break
+            if(f==0):
+                part_list.append((title,price,link))
+        except:
+            continue
+    return(part_list) 
 
 
 
