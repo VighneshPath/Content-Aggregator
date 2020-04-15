@@ -1,15 +1,30 @@
 {%extends "layout.html"%}
 
 {%block head%}
-content aggregator
+Content Aggregator
 {%endblock%}
 
 
 {%block body%}
+
 <ul>
-    {% for part in part_list%}
-        <h3><a href="{{part.link}}">{{part.title}}</a></h3>
-        <h2>{{part.price}}</h2>
+    {% for part in part_list %}
+    <div class="d-flex bd-highlight container product-box">
+        <div class="p-2 bd-highlight">
+            <div class="product-image">
+                <img src="{{ part.img_link }}" class = "img-thumbnail" width="200px">
+            </div>
+        </div>
+        <div class="p-2 bd-highlight flex-grow-1 container">
+            <blockquote class="blockquote">
+                <a href = "{{ part.link }}" style="color: black;"  class="mb-0" target="_blank">{{ part.title }}</a>
+                <footer class="blockquote-footer">{{ part.site }}</footer>
+            </blockquote>
+        </div>
+        <div class="p-2 bd-highlight"><h4>{{ part.price }}</h4></div>
+    </div>
+    <hr>
     {% endfor %}
 </ul>
+
 {%endblock%}

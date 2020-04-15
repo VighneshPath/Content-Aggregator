@@ -15,6 +15,8 @@ class Part():
     title:str
     price:str
     link:str
+    img_link:str
+    site:str
 
     def get_price(self):
         try:
@@ -23,7 +25,7 @@ class Part():
             return 0
 
     def __str__(self):
-        return(f"Part name: {self.title}\nPrice: {self.price}\nWebsite: {self.link}")
+        return(f"Part name: {self.title}\nPrice: {self.price}\nWebsite: {self.link}\nImage Link: {self.img_link}")
 
 def get_search_url(part_name, site, space_separator):
     search_url = site.replace("item goes here",space_separator.join(part_name.split()))
@@ -44,7 +46,7 @@ def part_list_threading(site, part_name,space_separator, sites_part_list , file)
         temp_part_list = file.scrape_site(site[0], part_name, site_soup)
         part_list = []
         for part in temp_part_list:
-            part_list.append(Part(part[0],part[1],part[2]))
+            part_list.append(Part(part[0],part[1],part[2],part[3],part[4]))
     else:
         part_list = []
     sites_part_list.extend(part_list)
