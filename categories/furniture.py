@@ -26,7 +26,7 @@ def amazon(soup,part_name,site):
             title = item.find("span", {"class": "a-size-base-plus a-color-base a-text-normal"}).get_text().strip()
             price = item.find("span", {"class": "a-price-whole"}).get_text().strip()
             link = "https://amazon.in" + item.find("a", {"class": "a-link-normal a-text-normal"})['href'].strip()
-            img_link = item.find("img",{"class":"s-image"})
+            img_link = item.find("img",{"class":"s-image"})['src']
             f=0
             for product in part_name:
                 if(product not in title):
@@ -46,7 +46,7 @@ def flipkart(soup,part_name,site):
             title=item.find("a",{"class":"_2cLu-l"}).get_text().strip()
             price=item.find("div",{"class":"_1vC4OE"}).get_text().strip()
             link = "https://flipkart.com"+ item.find("a",{"class":"_2cLu-l"})['href'].strip()
-            img_link = item.find("img",{"class":"_1Nyybr  _30XEf0"})['src']
+            img_link = item.find("div",{"class":"_3BTv9X _3MSCRn"}).img['src']
             f=0
             for product in part_name:
                 if(product not in title):
