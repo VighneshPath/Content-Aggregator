@@ -87,9 +87,10 @@ def vedcomp(soup, part_name, site):
                 price = item.find("span",{"class":"price-new"}).get_text().strip()
             link = item.find("h4",{"class":"name"}).a['href']
             try:
-                img_link = item.find("img",{"class":"lazy first-image"})["data-src"].replace(" ", "%20")
-            except:
                 img_link = item.find("img",{"class":"lazy first-image"})["data"].replace(" ", "%20")
+            except:
+                img_link = item.find("img",{"class":"lazy first-image"})["data-src"].replace(" ", "%20")
+
             flag = 0
             for word in part_name.split(" "):
                 if(word not in title.lower().split()):

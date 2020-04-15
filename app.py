@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, session
 from flask_session import Session
 import content_aggregator
+import requests
+headers ={
+"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
+}
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
