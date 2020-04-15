@@ -15,7 +15,7 @@ def scrape_site(site, part_name, soup):
         site_function = flipkart
     elif(site == "www.pepperfry.com"):
         site_function = pepperfry
-    part_list = site(soup,part_name,site)
+    part_list = site_function(soup,part_name,site)
     return part_list
 
 def amazon(soup,part_name,site):
