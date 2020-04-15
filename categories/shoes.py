@@ -53,7 +53,7 @@ def buyhatke(soup,part_name,site):
             price="Rs."+item.find("span",{"class":"product-price--value"}).b.getText().strip()
             link='https://compare.buyhatke.com/'+item.a['href'].strip()
             img_link=item.find("div",{"class":"product-img--wrap"}).img['data-original']
-            flag=0)
+            flag=0
             for value in part_name.split(" "):
                 if(value not in title.lower().split()):
                     flag=1
