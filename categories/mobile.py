@@ -25,12 +25,12 @@ def scrape_site(site, part_name, soup):
     elif (site == "amazon"):
         site = amazon
 
-    part_list = site(soup, part_name)
+    part_list = site(soup, part_name,site)
 
     return part_list
 
 #functions for each site...
-def paytmmall(soup, part_name):
+def paytmmall(soup, part_name,site):
     '''
         Function to scrape Part from paytmmall
         It returns a list of Part objects satisfying the part name
@@ -46,20 +46,21 @@ def paytmmall(soup, part_name):
             title = i.a['title']
             price = i.find("div", {"class": "_1kMS"}).span.text
             link = "https://paytmmall.com" + i.a['href']
+            img_link = i.find('div',{'class':'_3nWP'}).img['src']
             flag = 0
             for word in part_name.split():
                 if(word not in title.lower().split()):
                     flag = 1
                     break
             if(flag == 0):
-                part_list.append((title,price,link))
+                part_list.append((title,price,link,img_link,site))
 
         except:
             continue
 
     return part_list
 
-def flipkart(soup, part_name):
+def flipkart(soup, part_name,site):
     '''
         Function to scrape Part from flipkart
         It returns a list of Part objects satisfying the part name
@@ -75,19 +76,21 @@ def flipkart(soup, part_name):
                 title = i.find("div", {"class": "_3wU53n"}).text
                 price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text
                 link = "https://www.flipkart.com/" + i.a['href']
-            for word in part_name.split(" "):
-                if (word not in title.lower().split()):
-                    flag = 1
-                    break
-        if (flag == 0):
-            part_list.append((title, price, link))
+                img_link = "https://www.flipkart.com/"+i.find("div",{"class":"_1OCn9C"}).find("div",{'class':'_3BTv9X'}).img['src']
+                flag = 0
+                for word in part_name.split(" "):
+                    if (word not in title.lower().split()):
+                        flag = 1
+                        break
+                if (flag == 0):
+                    part_list.append((title, price, link,img_link  ,site))
 
         except:
             continue
 
     return part_list
 
-def snapdeal(soup, part_name):
+def snapdeal(soup, part_name,site):
     '''
     Function to scrape Part from snapdeal
     It returns a list of Part objects satisfying the part name
@@ -100,23 +103,28 @@ def snapdeal(soup, part_name):
     for i in items:
         try:
 
-            title = i.p.text
-            price =  i.find("span", {"class": "lfloat product-price"}).text
-            link = "https://www.snapdeal.com/product" + i.a['href']
+            title = i.find('p', {'class': 'product-title'}).text
+            price = i.find('span', {'class': 'lfloat product-price'}).text.replace('Rs. ', '₹')
+            try:
+                img_link = i.find('img', {'class': 'product-image'})['src']
+            except:
+                img_link = i.find('img', {'class': 'product-image'})['data-src']
+
+            link = i.find('a', {"class": "dp-widget-link noUdLine"})['href']
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
                     flag = 1
                     break
             if (flag == 0):
-                part_list.append((title, price, link))
+                part_list.append((title, price, link, img_link ,site))
 
         except:
             continue
 
     return part_list
 
-def shopclues(soup, part_name):
+def shopclues(soup, part_name,site):
     '''
         Function to scrape Part from shopclues
         It returns a list of Part objects satisfying the part name
@@ -132,49 +140,54 @@ def shopclues(soup, part_name):
             price = i.find("div", {"class": "ori_price"}).find("span", {"class": "p_price"}).text
             title = i.h2.text
             link = i.a['href']
+            try:
+                img_link = 'https:'+i.find('div',{'class':'img_section'}).img['src']
+            except:
+                img_link = 'https:'+i.find('div', {'class': 'img_section'}).img['data-img']
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
                     flag = 1
                     break
             if (flag == 0):
-                part_list.append((title, price, link))
+                part_list.append((title, price, link,img_link,site))
 
         except:
             continue
 
     return part_list
 
-def croma(soup, part_name):
+def croma(soup, part_name,site):
     '''
         Function to scrape Part from croma
         It returns a list of Part objects satisfying the part name
         It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
         '''
 
-    items = soup.findAll("div", {"class": "row", "style": " margin-right: 0;"})
+    items = soup.findAll("div",{"class":"row"})
     part_list = []
 
     for i in items:
         try:
 
-            title = i.find("a", {"class": "product__list--name"}).h3.text
-            link = "https://www.croma.com" + i.a['href']
-            price = i.find("div", {"class": "_priceRow"}).find("span", {"class": "pdpPrice"}).text
+            title = i.find("div",{"class":"row","style":" margin-right: 0;"}).find("a",{"class":"product__list--name"}).h3.text
+            link = "https://www.croma.com"+i.find("div",{"class":"row","style":" margin-right: 0;"}).a['href']
+            price = i.find("div",{"class":"row","style":" margin-right: 0;"}).find("div",{"class":"_priceRow"}).find("span",{"class":"pdpPrice"}).text
+            img_link = i.find('div',{'class':'col-md-2 col-xs-12 col-sm-3'}).picture.source['data-srcset']
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
                     flag = 1
                     break
             if (flag == 0):
-                part_list.append((title, price, link))
+                part_list.append((title, price, link,site))
 
         except:
             continue
 
     return part_list
 
-def amazon(soup, part_name):
+def amazon(soup, part_name,site):
     '''
         Function to scrape Part from amazon
         It returns a list of Part objects satisfying the part name
@@ -187,16 +200,17 @@ def amazon(soup, part_name):
     for i in items:
         try:
 
-            title = i.find("div", {"class": "sg-row"}).find("div", {"class": "a-section a-spacing-none"}).h2.a.find("span",{"class": "a-size-medium a-color-base a-text-normal"}).text
-            price = i.find("div", {"class": "a-row a-size-base a-color-secondary"}).find("span",{"class": "a-color-price"}).text
-            link = "https://www.amazon.in" + i.find("a", {"class": "a-link-normal a-text-normal"})['href']
+            title = i.find('a', {"class": "a-link-normal a-text-normal"}).find('span', {'class': 'a-size-medium a-color-base a-text-normal'}).text
+            price = i.find("div", {"class": "a-row a-size-small"}).find('a', {'class': 'a-link-normal'}).find('span',{'class': 'a-size-base'}).text
+            link = "https://amazon.in"+i.find("div", {"class": "a-section a-spacing-none"}).find('a', {'class': 'a-link-normal'})['href'].strip()
+            img_link = i.find("div", {"class": "a-section aok-relative s-image-fixed-height"}).img["src"]
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
                     flag = 1
                     break
             if (flag == 0):
-                part_list.append((title, price, link))
+                part_list.append((title, price, link,img_link, site))
 
         except:
             continue
