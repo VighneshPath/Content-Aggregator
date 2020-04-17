@@ -10,7 +10,9 @@ from bs4 import BeautifulSoup
 
 parts_sites={
     "+":[("www.libertyshoesonline.com","https://www.libertyshoesonline.com/liberty/st-search?q=shoes=item goes here"),
-         ("www.compare.buyhatke.com","https://compare.buyhatke.com/pricelist/big-fox-casual-shoes-price-in-india-hatke335504=item goes here")]
+         ("www.compare.buyhatke.com","https://compare.buyhatke.com/pricelist/big-fox-casual-shoes-price-in-india-hatke335504=item goes here")
+          ("www.fashos.com","https://www.fashos.com/footwear/men/formal.html=item goes here")
+         ]
 }
 
 
@@ -19,6 +21,8 @@ def scrape_site(site, part_name, soup):
         site_function=libertyshoes
     elif(site == "www.compare.buyhatke.com"):
         site_function=buyhatke
+    elif(site=="www.fashos.com"):
+        site_function=fashos
     part_list=site_function(soup, part_name,site)
     return part_list
 
@@ -42,6 +46,29 @@ def libertyshoes(soup, part_name,site):
         except:
             continue
     return part_list
+
+def fashos(soup,part_name,site):
+    results=soup.findAll("div",{"class":"product-item-info"})
+    part_list=[]
+    for item in results:
+        try:
+            title=item.find("div",{"class":"product details product-item-details"}).find("strong",{"class":"product name product-item-name"}).find("a",{"class":"product-item-link"}).getText().strip()
+            price=item.find("span",{"class":"price-wrapper"}).find("span",{"class":"price"}).getText().strip()
+            link=item.a['href'].strip()
+            img_link=item.a.img['src']
+            flag=0
+            for value in part_name.split(" "):
+                if(value not in title.lower().split()):
+                    flag=1
+                    break
+            if(flag==0):
+                part_list.append((title,price,link,img_link,site))
+        except:
+            continue
+    return part_list
+    
+
+
 
 
 def buyhatke(soup,part_name,site):
