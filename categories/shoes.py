@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 parts_sites={
     "+":[("www.libertyshoesonline.com","https://www.libertyshoesonline.com/liberty/st-search?q=shoes=item goes here"),
          ("www.compare.buyhatke.com","https://compare.buyhatke.com/pricelist/big-fox-casual-shoes-price-in-india-hatke335504=item goes here"),
-          ("www.fashos.com","https://www.fashos.com/footwear/men/formal.html=item goes here")
+          ("www.fashos.com","https://www.fashos.com/catalogsearch/result/?q=penny+loafer+shoes=item goes here")
          ]
 }
 
