@@ -3,7 +3,7 @@ import requests
 
 headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0"}
 
-part_sites ={"%20":[("flipkart" , "https://www.flipkart.com/search?q=item goes here")] , "+":[("snapdeal" , "https://www.snapdeal.com/search?keyword=item goes here") , ("ebay" , "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=item goes here")] , "-" = [("headphonezone" , "https://www.headphonezone.in/collections/item goes here")]
+part_sites ={"%20":[("flipkart" , "https://www.flipkart.com/search?q=item goes here")] , "+":[("snapdeal" , "https://www.snapdeal.com/search?keyword=item goes here") , ("ebay" , "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=item goes here")] , "-":[("headphonezone" , "https://www.headphonezone.in/collections/item goes here")]
 } 	
 
 
