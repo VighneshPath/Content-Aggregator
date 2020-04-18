@@ -3,7 +3,7 @@ import requests
 
 headers = {"User-Agent" : "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0"}
 
-part_sites ={"%20":[("flipkart" , "https://www.flipkart.com/search?q=headphones&sid=0pm%2Cfcn&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_na&as-pos=0&as-type=HISTORY&suggestionId=headphones%7CHeadphones+%26+Earphones&requestId=05654bd0-e28d-4421-a42f-328d90a25cd2&sort=popularity")] , "+":[("snapdeal" , "https://www.snapdeal.com/search?keyword=headphones&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy") , ("ebay" , "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=headphones&_sacat=0")] , "-" = [("headphonezone" , "https://www.headphonezone.in/collections/bluetooth-wireless-earphones")]
+part_sites ={"%20":[("flipkart" , "https://www.flipkart.com/search?q=item goes here")] , "+":[("snapdeal" , "https://www.snapdeal.com/search?keyword=item goes here") , ("ebay" , "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=item goes here")] , "-" = [("headphonezone" , "https://www.headphonezone.in/collections/item goes here")]
 } 	
 
 
@@ -11,14 +11,14 @@ part_sites ={"%20":[("flipkart" , "https://www.flipkart.com/search?q=headphones&
 
 def scrape_site(site, part_name, soup):
     
-    if(site == "headphonezone"):
-        site = headphonezone
-    elif(site == "flipkart"):
-        site = flipkart
-    elif(site == "snapdeal"):
-        site = snapdeal
-    elif(site == "ebay"):
-        site = ebay
+    if(site == "www.headphonezone.in"):
+        site_function = headphonezone
+    elif(site == "www.flipkart.com"):
+        site_function = flipkart
+    elif(site == "www.snapdeal.com"):
+        site_function = snapdeal
+    elif(site == "www.ebay.com"):
+        site_function = ebay
     part_list = site(soup, part_name)
     return part_list
 
@@ -31,7 +31,7 @@ def scrape_site(site, part_name, soup):
 
 # soup = BeautifulSoup(html.text , "html.parser")
 
-def heaphonezone(soup , part_name):
+def heaphonezone(soup , part_name , site):
 
 	results = soup.find_all("div" , {"class":"product-wrap"})
 
@@ -54,7 +54,7 @@ def heaphonezone(soup , part_name):
 					flag = 1
 					break
 				if(flag == 0):
-					part_list.append((title,price,link))
+					part_list.append((title,price,link,img,site))
 							
 
 		except:
@@ -69,7 +69,7 @@ def heaphonezone(soup , part_name):
 # html = requests.get(url)
 
 # soup = BeautifulSoup(html.text , "html.parser")
-def flipkart(soup , part_name):
+def flipkart(soup , part_name , site):
 
 	results = soup.find_all("div" , {"class":"_3liAhj"})
 
@@ -82,7 +82,7 @@ def flipkart(soup , part_name):
 			link_ = result.find("a" , {"class":"Zhf2z-"})
 			link = link_["href"]
 			
-			# img = result.find()
+			img = result.find()
 
 			flag = 0
 
@@ -91,7 +91,7 @@ def flipkart(soup , part_name):
 					flag = 1
 					break
 				if(flag == 0):
-					part_list.append((title,price,link))
+					part_list.append((title,price,link,img,site))
 		except:
 			continue
 	return part_list
@@ -103,7 +103,7 @@ def flipkart(soup , part_name):
 # html = requests.get(url)
 
 # soup = BeautifulSoup(html.text , "html.parser")
-def snapdeal(soup , part_name):
+def snapdeal(soup , part_name , site):
 
 	results = soup.find_all("div" , {"class":"product-tuple-description"})
 
@@ -115,8 +115,8 @@ def snapdeal(soup , part_name):
 
 			price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
 
-		# 	img_ = item.find("img" , {"class":"product-image"})
-		# 	img = img_["src"]
+			img_ = item.find("img" , {"class":"product-image"})
+			img = img_["src"]
 
 			link = result.a["href"]
 
@@ -127,7 +127,7 @@ def snapdeal(soup , part_name):
 					flag = 1
 					break
 				if flag == 0:
-					part_list.append((title,price,link))
+					part_list.append((title,price,link.img,site))
 		except:
 			continue
 
@@ -141,7 +141,7 @@ def snapdeal(soup , part_name):
 
 # # soup = BeautifulSoup(html.text , "html.parser")
 
-# def ebay(soup , part_name):
+# def ebay(soup , part_name , site):
 
 # 	results = soup.find_all("div" , {"class":"s-item__wrapper clearfix"})
 
