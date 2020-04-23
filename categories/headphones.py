@@ -39,9 +39,9 @@ def heaphonezone(soup , part_name , site):
 		try:
 			result = item.find("div" , {"class":"product-details"})
 
-			title = result.find("span" , {"class":"title"})
+			title = result.find("span" , {"class":"title"}).get_text().strip()
 
-			price = result.find("span" , {"class":"money"})
+			price = result.find("span" , {"class":"money"}).get_text().strip()
 
 			link = item.a["href"]
 
@@ -79,10 +79,11 @@ def flipkart(soup , part_name , site):
 
 			price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()
 
-			link_ = result.find("a" , {"class":"Zhf2z-"})
-			link = link_["href"]
+			img_ = result.find("a" , {"class":"Zhf2z-"})
+			img = img_["href"]
 			
-			img = result.find()
+			link_ = result.find("a" , {"class":"_2cLu-l"})
+			link = link_["href"]
 
 			flag = 0
 
@@ -98,40 +99,40 @@ def flipkart(soup , part_name , site):
 
 # # SANPDEAL
 
-# url = "https://www.snapdeal.com/search?keyword=headphones&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy"
+# # url = "https://www.snapdeal.com/search?keyword=headphones&santizedKeyword=&catId=&categoryId=0&suggested=false&vertical=&noOfResults=20&searchState=&clickSrc=go_header&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy"
 
-# html = requests.get(url)
+# # html = requests.get(url)
 
-# soup = BeautifulSoup(html.text , "html.parser")
-def snapdeal(soup , part_name , site):
+# # soup = BeautifulSoup(html.text , "html.parser")
+# def snapdeal(soup , part_name , site):
 
-	results = soup.find_all("div" , {"class":"product-tuple-description"})
+# 	results = soup.find_all("div" , {"class":"product-tuple-description"})
 
-	for item in results:
-		try:
-			result = item.find("div" , {"class":"product-desc-rating"})
+# 	for item in results:
+# 		try:
+# 			result = item.find("div" , {"class":"product-desc-rating"})
 
-			title = result.a.p.get_text().strip()
+# 			title = result.a.p.get_text().strip()
 
-			price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
+# 			price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
 
-			img_ = item.find("img" , {"class":"product-image"})
-			img = img_["src"]
+# 			img_ = item.find("img" , {"class":"product-image"})
+# 			img = img_["src"]
 
-			link = result.a["href"]
+# 			link = result.a["href"]
 
-			flag = 0
+# 			flag = 0
 
-			for word in part_name.split(" "):
-				if(word not in title.lower().split()):
-					flag = 1
-					break
-				if flag == 0:
-					part_list.append((title,price,link.img,site))
-		except:
-			continue
+# 			for word in part_name.split(" "):
+# 				if(word not in title.lower().split()):
+# 					flag = 1
+# 					break
+# 				if flag == 0:
+# 					part_list.append((title,price,link.img,site))
+# 		except:
+# 			continue
 
-	return part_list
+# 	return part_list
 
 # # # EBAY
 
