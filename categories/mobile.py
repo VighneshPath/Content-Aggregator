@@ -46,7 +46,7 @@ def paytmmall(soup, part_name, site):
         try:
 
             title = i.a['title']
-            price = "Rs." + i.find("div", {"class": "_1kMS"}).span.text.replace("")
+            price = "Rs." + i.find("div", {"class": "_1kMS"}).span.text
             link = "https://paytmmall.com" + i.a['href']
             img_link = i.find('div', {'class': '_3nWP'}).img['src']
             flag = 0
