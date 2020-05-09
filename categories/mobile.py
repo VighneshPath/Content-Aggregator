@@ -1,3 +1,5 @@
+
+
 import requests
 import bs4
 
@@ -70,27 +72,27 @@ def flipkart(soup, part_name,site):
     items = soup.findAll("div", {"class": "_1UoZlX"})
     part_list = []
 
-
+    for i in items:
         try:
-            for i in items:
-                title = i.find("div", {"class": "_3wU53n"}).text
-                price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text
-                link = "https://www.flipkart.com/" + i.a['href']
-                img_link = "https://www.flipkart.com/"+i.find("div",{"class":"_1OCn9C"}).find("div",{'class':'_3BTv9X'}).img['src']
-                flag = 0
-                for word in part_name.split(" "):
-                    if (word not in title.lower().split()):
-                        flag = 1
-                        break
-                if (flag == 0):
-                    part_list.append((title, price, link,img_link  ,site))
+
+            title = i.find("div", {"class": "_3wU53n"}).text
+            price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text
+            link = "https://www.flipkart.com/" + i.a['href']
+            img_link = "https://www.flipkart.com/"+i.find("div",{"class":"_1OCn9C"}).find("div",{'class':'_3BTv9X'}).img['src']
+            flag = 0
+            for word in part_name.split(" "):
+                if (word not in title.lower().split()):
+                    flag = 1
+                    break
+            if (flag == 0):
+                part_list.append((title, price, link,img_link  ,site))
 
         except:
             continue
 
     return part_list
 
-def snapdeal(soup, part_name,site):
+'''def snapdeal(soup, part_name,site):
     '''
     Function to scrape Part from snapdeal
     It returns a list of Part objects satisfying the part name
@@ -123,7 +125,7 @@ def snapdeal(soup, part_name,site):
             continue
 
     return part_list
-
+'''
 def shopclues(soup, part_name,site):
     '''
         Function to scrape Part from shopclues
@@ -217,4 +219,3 @@ def amazon(soup, part_name,site):
 
 
     return part_list
-
