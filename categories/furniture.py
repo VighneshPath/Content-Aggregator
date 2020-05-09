@@ -28,12 +28,12 @@ def amazon(soup,part_name,site):
             link = "https://amazon.in" + item.find("a", {"class": "a-link-normal a-text-normal"})['href'].strip()
             img_link = item.find("img",{"class":"s-image"})['src']
             f=0
-            for product in part_name:
-                if(product not in title):
+            for product in part_name.split(" "):
+                if(product not in title.lower.split()):
                     f=1
                     break
             if(f==0):
-                part_list.append((title,price,link,img_link))   
+                part_list.append((title,price,link,img_link,site))   
         except:
             continue
     return  part_list               
@@ -48,12 +48,12 @@ def flipkart(soup,part_name,site):
             link = "https://flipkart.com"+ item.find("a",{"class":"_2cLu-l"})['href'].strip()
             img_link = item.find("div",{"class":"_3BTv9X _3MSCRn"}).img['src']
             f=0
-            for product in part_name:
-                if(product not in title):
+            for product in part_name.split(" "):
+                if(product not in title.lower.split()):
                     f=1
                     break
             if(f==0):
-              part_list.append((title,price,link,img_link))   
+              part_list.append((title,price,link,img_link,site))   
         except:
             continue
     return part_list
@@ -65,15 +65,15 @@ def pepperfry(soup,part_name,site):
         try:
             title=(item.find("a",{"class":"clip-prd-dtl"}).text)
             link="https://www.pepperfry.com/"+(item.find("a",{"class":"clip-prd-dtl"})['href'])
-            price = (item.find("div",{"class":"clip-price-blocks row"}).find("span",{"class":"clip-offr-price"}).text.strip())
+            price = (item.find("div",{"class":"clip-price-blocks row"}).find("span",{"class":"clip-offr-price"}).text.strip().replace("Rs.","₹"))
             img_link = item.find("div",{"class":"card-img-wrp center-xs card-srch-img-wrp"}).img['src']
             f=0
-            for product in part_name:
-                if(product not in title):
+            for product in part_name.split(" "):
+                if(product not in title.lower.split()):
                     f=1
                     break
             if(f==0):
-                part_list.append((title,price,link,img_link))
+                part_list.append((title,price,link,img_link,site))
         except:
             continue
     return(part_list) 
