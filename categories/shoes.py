@@ -33,7 +33,7 @@ def libertyshoes(soup, part_name,site):
     for item in results:
         try:
             title=item.find("div",{"class":"info-box"}).a.h3.getText().strip()
-            price=item.find("div",{"class":"info-box"}).p.span.getText().strip()
+            price=item.find("div",{"class":"info-box"}).p.span.getText().strip().replace("Rs.","₹")
             link=item.find("div",{"class":"info-box"}).a['href'].strip()
             img_link=item.a.img['data-src']
             flag=0
@@ -54,7 +54,7 @@ def buyhatke(soup,part_name,site):
     for item in results:
         try:
             title=item.find("div",{"class":"padding-horizontal-1x"}).h3.getText().strip()
-            price="Rs."+item.find("span",{"class":"product-price--value"}).b.getText().strip()
+            price="₹"+item.find("span",{"class":"product-price--value"}).b.getText().strip()
             link='https://compare.buyhatke.com/'+item.a['href'].strip()
             img_link=item.find("div",{"class":"product-img--wrap"}).img['data-original']
             flag=0
@@ -74,7 +74,7 @@ def fashos(soup,part_name,site):
     for item in results:
         try:
             title=item.find("div",{"class":"product details product-item-details"}).find("strong",{"class":"product name product-item-name"}).find("a",{"class":"product-item-link"}).getText().strip()
-            price=item.find("span",{"class":"price-wrapper"}).find("span",{"class":"price"}).getText().strip()
+            price=item.find("span",{"class":"price-wrapper"}).find("span",{"class":"price"}).getText().strip().replace("Rs.","₹")
             link=item.a['href'].strip()
             img_link=item.a.img['src']
             flag=0
