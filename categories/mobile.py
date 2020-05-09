@@ -1,7 +1,7 @@
 import requests
 import bs4
 
-parts_sites={'%20':[('www.paytmmall.com','https://paytmmall.com/shop/search?q=items goes here'),('flipkart','https://www.flipkart.com/search?q=items goes here'),('www.shopclues.com','https://www.shopclues.com/item goes here'),]
+parts_sites={'%20':[('www.paytmmall.com','https://paytmmall.com/shop/search?q=items goes here&from=organic&child_site_id=6&site_id=2'),('www.flipkart.com','https://www.flipkart.com/search?q=items goes here'),('www.shopclues.com','https://www.shopclues.com/search?q=items goes here&sc_z=2222&z=0&count=10'),]
              ,'+':[('www.croma.com','https://www.croma.com/search/?text=item goes here'),('www.amazon.in','https://www.amazon.in/s?k=item goes here')]}
 # in %20 : ('www.snapdeal.com','https://www.snapdeal.com/search?keyword=items goes here')
 
