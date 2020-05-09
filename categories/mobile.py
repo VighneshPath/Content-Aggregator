@@ -1,9 +1,9 @@
 import requests
 import bs4
 
-parts_sites={'%20':[('paytmmall','https://paytmmall.com/shop/search?q=itemsgohere&from=organic&child_site_id=6&site_id=2&category=72873'),('shopclues','https://www.shopclues.com/search?q=redmi&sc_z=2222&z=0&count=9'),('flipkart','https://www.flipkart.com/search?q=itemsgohere&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off'),('snapdeal','https://www.snapdeal.com/products/mobiles-mobile-phones?sort=plrty')]
-             ,'+':[('croma','https://www.croma.com/phones-wearables/c/1'),('amazon','https://www.amazon.in/s?k=item goes here')]}
-
+parts_sites={'%20':[('www.paytmmall.com','https://paytmmall.com/shop/search?q=items goes here'),('flipkart','https://www.flipkart.com/search?q=items goes here'),('www.shopclues.com','https://www.shopclues.com/item goes here'),]
+             ,'+':[('www.croma.com','https://www.croma.com/search/?text=item goes here'),('www.amazon.in','https://www.amazon.in/s?k=item goes here')]}
+# in %20 : ('www.snapdeal.com','https://www.snapdeal.com/products/mobiles-mobile-phones?sort=plrty')
 
 # funtion to select the site
 def scrape_site(site, part_name, soup):
@@ -13,18 +13,18 @@ def scrape_site(site, part_name, soup):
         It takes arguments site name, part name, BeautifulSoup object of site
         '''
 
-    if (site == "paytmmall"):
-        site = paytmmall
-    elif (site == "flipkart"):
-        site = flipkart
-    elif (site == "snapdeal"):
-        site = snapdeal
-    elif (site == "shopclues"):
-        site = shopclues
-    elif (site == "croma"):
-        site = croma
-    elif (site == "amazon"):
-        site = amazon
+    if (site == "www.paytmmall.com"):
+        site_function = paytmmall
+    elif (site == "www.flipkart.com"):
+        site_function = flipkart
+    #elif (site == "www.snapdeal.com"):
+    #    site_function = snapdeal
+    elif (site == "www.shopclues.com"):
+        site_function = shopclues
+    elif (site == "www.croma.com"):
+        site_function = croma
+    elif (site == "www.amazon.in"):
+        site_function = amazon
 
     part_list = site(soup, part_name, site)
 
@@ -46,7 +46,7 @@ def paytmmall(soup, part_name, site):
         try:
 
             title = i.a['title']
-            price = i.find("div", {"class": "_1kMS"}).span.text
+            price = "Rs." + i.find("div", {"class": "_1kMS"}).span.text.replace("")
             link = "https://paytmmall.com" + i.a['href']
             img_link = i.find('div', {'class': '_3nWP'}).img['src']
             flag = 0
@@ -77,10 +77,9 @@ def flipkart(soup, part_name, site):
         try:
 
             title = i.find("div", {"class": "_3wU53n"}).text
-            price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text
+            price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text.replace('₹','Rs.')
             link = "https://www.flipkart.com/" + i.a['href']
-            img_link = "https://www.flipkart.com/" + \
-                       i.find("div", {"class": "_1OCn9C"}).find("div", {'class': '_3BTv9X'}).img['src']
+            img_link = "https://www.flipkart.com/" + i.find("div", {"class": "_1OCn9C"}).find("div", {'class': '_3BTv9X'}).img['src']
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
@@ -142,9 +141,9 @@ def shopclues(soup, part_name, site):
             title = i.h2.text
             link = i.a['href']
             try:
-                img_link = 'https:' + i.find('div', {'class': 'img_section'}).img['src']
-            except:
                 img_link = 'https:' + i.find('div', {'class': 'img_section'}).img['data-img']
+            except:
+                img_link = 'https:' + i.find('div', {'class': 'img_section'}).img['src']
             flag = 0
             for word in part_name.split(" "):
                 if (word not in title.lower().split()):
@@ -172,12 +171,9 @@ def croma(soup, part_name, site):
     for i in items:
         try:
 
-            title = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("a", {
-                "class": "product__list--name"}).h3.text
+            title = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("a", {"class": "product__list--name"}).h3.text
             link = "https://www.croma.com" + i.find("div", {"class": "row", "style": " margin-right: 0;"}).a['href']
-            price = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("div",
-                                                                                       {"class": "_priceRow"}).find(
-                "span", {"class": "pdpPrice"}).text
+            price = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("div",{"class": "_priceRow"}).find("span", {"class": "pdpPrice"}).text.replace('₹','Rs.')
             img_link = i.find('div', {'class': 'col-md-2 col-xs-12 col-sm-3'}).picture.source['data-srcset']
             flag = 0
             for word in part_name.split(" "):
@@ -185,7 +181,7 @@ def croma(soup, part_name, site):
                     flag = 1
                     break
             if (flag == 0):
-                part_list.append((title, price, link, site))
+                part_list.append((title, price, link,img_link, site))
 
         except:
             continue
@@ -206,13 +202,9 @@ def amazon(soup, part_name, site):
     for i in items:
         try:
 
-            title = i.find('a', {"class": "a-link-normal a-text-normal"}).find('span', {
-                'class': 'a-size-medium a-color-base a-text-normal'}).text
-            price = i.find("div", {"class": "a-row a-size-small"}).find('a', {'class': 'a-link-normal'}).find('span', {
-                'class': 'a-size-base'}).text
-            link = "https://amazon.in" + \
-                   i.find("div", {"class": "a-section a-spacing-none"}).find('a', {'class': 'a-link-normal'})[
-                       'href'].strip()
+            title = i.find('a', {"class": "a-link-normal a-text-normal"}).find('span', {'class': 'a-size-medium a-color-base a-text-normal'}).text
+            price = "Rs." + i.find("div", {"class": "a-row a-size-small"}).find('a', {'class': 'a-link-normal'}).find('span', {'class': 'a-size-base'}).text
+            link = "https://amazon.in/"+i.find("div", {"class": "a-section a-spacing-none"}).find('a', {'class': 'a-link-normal'})['href'].strip()
             img_link = i.find("div", {"class": "a-section aok-relative s-image-fixed-height"}).img["src"]
             flag = 0
             for word in part_name.split(" "):
