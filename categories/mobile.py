@@ -3,7 +3,7 @@ import bs4
 
 parts_sites={'%20':[('www.paytmmall.com','https://paytmmall.com/shop/search?q=items goes here'),('flipkart','https://www.flipkart.com/search?q=items goes here'),('www.shopclues.com','https://www.shopclues.com/item goes here'),]
              ,'+':[('www.croma.com','https://www.croma.com/search/?text=item goes here'),('www.amazon.in','https://www.amazon.in/s?k=item goes here')]}
-# in %20 : ('www.snapdeal.com','https://www.snapdeal.com/products/mobiles-mobile-phones?sort=plrty')
+# in %20 : ('www.snapdeal.com','https://www.snapdeal.com/search?keyword=items goes here')
 
 # funtion to select the site
 def scrape_site(site, part_name, soup):
@@ -26,7 +26,7 @@ def scrape_site(site, part_name, soup):
     elif (site == "www.amazon.in"):
         site_function = amazon
 
-    part_list = site(soup, part_name, site)
+    part_list = site_function(soup, part_name, site)
 
     return part_list
 
@@ -35,8 +35,8 @@ def scrape_site(site, part_name, soup):
 def paytmmall(soup, part_name, site):
     '''
         Function to scrape Part from paytmmall
-        It returns a list of Part objects satisfying the part name
-        It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
+        It returns a list of tuples in the order of title, price, link, img_link, websitename
+        It takes Arguments BeautifulSoup object of paytmmall part search, part name
         '''
 
     items = soup.findAll("div", {"class": "_3WhJ"})
@@ -66,8 +66,8 @@ def paytmmall(soup, part_name, site):
 def flipkart(soup, part_name, site):
     '''
         Function to scrape Part from flipkart
-        It returns a list of Part objects satisfying the part name
-        It takes Arguments BeautifulSoup object of amazon.in part search, part name
+        It returns a list of tuples in the order of title, price, link, img_link, websitename
+        It takes Arguments BeautifulSoup object of flipkart part search, part name
         '''
 
     items = soup.findAll("div", {"class": "_1UoZlX"})
@@ -97,15 +97,15 @@ def flipkart(soup, part_name, site):
 '''def snapdeal(soup, part_name,site):
 
     #Function to scrape Part from snapdeal
-    #It returns a list of Part objects satisfying the part name
-    #It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
+    #It returns a list of tuples in the order of title, price, link, img_link, websitename
+    #It takes Arguments BeautifulSoup object of snapdeal part search, part name
 
     items = soup.findAll("div", {"class": "product-tuple-description"})
     part_list = []
     for i in items:
         try:
             title = i.find('p', {'class': 'product-title'}).text
-            price = i.find('span', {'class': 'lfloat product-price'}).text.replace('Rs. ', '₹')
+            price = i.find('span', {'class': 'lfloat product-price'}).text.replace('₹','Rs.')
             try:
                 img_link = i.find('img', {'class': 'product-image'})['src']
             except:
@@ -128,7 +128,7 @@ def shopclues(soup, part_name, site):
     '''
         Function to scrape Part from shopclues
         It returns a list of Part objects satisfying the part name
-        It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
+        It takes Arguments BeautifulSoup object of shopclues part search, part name
         '''
 
     items = soup.findAll("div", {"class": "column col3 search_blocks"})
@@ -161,8 +161,8 @@ def shopclues(soup, part_name, site):
 def croma(soup, part_name, site):
     '''
         Function to scrape Part from croma
-        It returns a list of Part objects satisfying the part name
-        It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
+        It returns a list of tuples in the order of title, price, link, img_link, websitename
+        It takes Arguments BeautifulSoup object of croma part search, part name
         '''
 
     items = soup.findAll("div", {"class": "row"})
@@ -192,8 +192,8 @@ def croma(soup, part_name, site):
 def amazon(soup, part_name, site):
     '''
         Function to scrape Part from amazon
-        It returns a list of Part objects satisfying the part name
-        It takes Arguments BeautifulSoup object of mdcomputers.in part search, part name
+        It returns a list of tuples in the order of title, price, link, img_link, websitename
+        It takes Arguments BeautifulSoup object of amazon.in part search, part name
         '''
 
     items = soup.findAll("div", {"class": "sg-col-inner"})
