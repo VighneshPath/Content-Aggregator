@@ -44,21 +44,19 @@ def headphonezone(soup , part_name , site):
 
             link = item.a["href"]
 
-<<<<<<< HEAD
 			title = result.find("span" , {"class":"title"}).get_text().strip()
 
 			price = result.find("span" , {"class":"money"}).get_text().strip()
-=======
+
             img = item.div.a["href"]
 
             flag = 0
->>>>>>> 9b33e81eb1d2109ed36ed93e5846be6d3cbeea0b
 
             for word in part_name.split(" "):
                 if(word not in title.lower().split()):
                     flag = 1
                     break
-                if(flag == 0):
+            if(flag == 0):
                     part_list.append((title,price,link,img,site))
 
 
@@ -93,15 +91,11 @@ def flipkart(soup , part_name , site):
             link_ = result.find("a" , {"class":"Zhf2z-"})
             link = link_["href"]
 
-<<<<<<< HEAD
 			img_ = result.find("a" , {"class":"Zhf2z-"})
 			img = img_["href"]
 			
 			link_ = result.find("a" , {"class":"_2cLu-l"})
 			link = link_["href"]
-=======
-            img = result.find()
->>>>>>> 9b33e81eb1d2109ed36ed93e5846be6d3cbeea0b
 
             flag = 0
 
@@ -109,7 +103,7 @@ def flipkart(soup , part_name , site):
                 if(word not in title.lower().split()):
                     flag = 1
                     break
-                if(flag == 0):
+            if(flag == 0):
                     part_list.append((title,price,link,img,site))
         except:
             continue
@@ -121,7 +115,7 @@ def flipkart(soup , part_name , site):
 
 # # html = requests.get(url)
 
-<<<<<<< HEAD
+
 # # soup = BeautifulSoup(html.text , "html.parser")
 # def snapdeal(soup , part_name , site):
 
@@ -152,7 +146,7 @@ def flipkart(soup , part_name , site):
 # 			continue
 
 # 	return part_list
-=======
+
 # soup = BeautifulSoup(html.text , "html.parser")
 def snapdeal(soup , part_name , site):
     part_list = []
@@ -178,14 +172,14 @@ def snapdeal(soup , part_name , site):
                 if(word not in title.lower().split()):
                     flag = 1
                     break
-                if flag == 0:
+            if(flag == 0):
                     part_list.append((title,price,link.img,site))
         except:
             continue
 
     return part_list
 
->>>>>>> 9b33e81eb1d2109ed36ed93e5846be6d3cbeea0b
+
 
 # # # EBAY
 
