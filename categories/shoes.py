@@ -32,9 +32,9 @@ def libertyshoes(soup, part_name,site):
     part_list=[]
     for item in results:
         try:
-            title=item.find("div",{"class":"info-box"}).a.h3.getText().strip()
-            price=item.find("div",{"class":"info-box"}).p.span.getText().strip().replace("Rs.","₹")
-            link=item.find("div",{"class":"info-box"}).a['href'].strip()
+            title=item.a.h3.getText().strip()
+            price=item.p.span.getText().strip().replace("Rs.","₹")
+            link=item.a['href'].strip()
             img_link=item.a.img['data-src']
             flag=0
             for value in part_name.split(" "):
