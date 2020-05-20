@@ -5,30 +5,39 @@ A Simple Product Price Comparison Content Aggregator
 
 The Program Currently Checks Products and their Prices available on the following websites based on the categories:-
 
-        1)Mobiles
-                -amazon
-                -shopclues
-                -paytmmall
-                -flipkart
-                -croma
-        2)Headphones
-                -amazon
-                -flipkart
-                -snapdeal
-        3)Computer Parts
-                -mdcomputers
-                -amazon
-                -primeabgb
-                -vedantcomputers
-                -theitdepot
-         4)Shoes
-                -libertyshoesonline
-                -compare.byhatke
-                -fashos
-                -flipkart
-         5)Furniture
-                -amazon
-                -pepperfry
+### 1)Mobiles
+
+        -amazon
+        -shopclues
+        -paytmmall
+        -flipkart
+        -croma
+
+### 2)Headphones
+
+        -amazon
+        -flipkart
+        -snapdeal
+        
+       
+### 3)Computer Parts
+        -mdcomputers
+        -amazon
+        -primeabgb
+        -vedantcomputers
+        -theitdepot
+        
+### 4)Shoes
+
+        -libertyshoesonline
+        -compare.byhatke
+        -fashos
+        -flipkart
+
+### 5)Furniture
+
+        -amazon
+        -pepperfry
  
  # Usage
  Follow the steps given:-
