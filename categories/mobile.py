@@ -46,7 +46,7 @@ def paytmmall(soup, part_name, site):
         try:
 
             title = i.a['title']
-            price = "Rs." + i.find("div", {"class": "_1kMS"}).span.text
+            price = "₹" + i.find("div", {"class": "_1kMS"}).span.text
             link = "https://paytmmall.com" + i.a['href']
             img_link = i.find('div', {'class': '_3nWP'}).img['src']
             flag = 0
@@ -77,7 +77,7 @@ def flipkart(soup, part_name, site):
         try:
 
             title = i.find("div", {"class": "_3wU53n"}).text
-            price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text.replace('₹','Rs.')
+            price = i.find("div", {"class": "_6BWGkk"}).find("div", {"class": "_1vC4OE _2rQ-NK"}).text
             link = "https://www.flipkart.com/" + i.a['href']
             img_link = "https://www.flipkart.com/" + i.find("div", {"class": "_1OCn9C"}).find("div", {'class': '_3BTv9X'}).img['src']
             flag = 0
@@ -105,7 +105,7 @@ def flipkart(soup, part_name, site):
     for i in items:
         try:
             title = i.find('p', {'class': 'product-title'}).text
-            price = i.find('span', {'class': 'lfloat product-price'}).text.replace('₹','Rs.')
+            price = i.find('span', {'class': 'lfloat product-price'}).text
             try:
                 img_link = i.find('img', {'class': 'product-image'})['src']
             except:
@@ -137,7 +137,7 @@ def shopclues(soup, part_name, site):
     for i in items:
         try:
 
-            price = i.find("div", {"class": "ori_price"}).find("span", {"class": "p_price"}).text
+            price = i.find("div", {"class": "ori_price"}).find("span", {"class": "p_price"}).text.replace('Rs.','₹')
             title = i.h2.text
             link = i.a['href']
             try:
@@ -173,7 +173,7 @@ def croma(soup, part_name, site):
 
             title = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("a", {"class": "product__list--name"}).h3.text
             link = "https://www.croma.com" + i.find("div", {"class": "row", "style": " margin-right: 0;"}).a['href']
-            price = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("div",{"class": "_priceRow"}).find("span", {"class": "pdpPrice"}).text.replace('₹','Rs.')
+            price = i.find("div", {"class": "row", "style": " margin-right: 0;"}).find("div",{"class": "_priceRow"}).find("span", {"class": "pdpPrice"}).text
             img_link = i.find('div', {'class': 'col-md-2 col-xs-12 col-sm-3'}).picture.source['data-srcset']
             flag = 0
             for word in part_name.split(" "):
@@ -203,7 +203,7 @@ def amazon(soup, part_name, site):
         try:
 
             title = i.find('a', {"class": "a-link-normal a-text-normal"}).find('span', {'class': 'a-size-medium a-color-base a-text-normal'}).text
-            price = "Rs." + i.find("div", {"class": "a-row a-size-small"}).find('a', {'class': 'a-link-normal'}).find('span', {'class': 'a-size-base'}).text
+            price = "₹" + i.find("div", {"class": "a-row a-size-small"}).find('a', {'class': 'a-link-normal'}).find('span', {'class': 'a-size-base'}).text
             link = "https://amazon.in/"+i.find("div", {"class": "a-section a-spacing-none"}).find('a', {'class': 'a-link-normal'})['href'].strip()
             img_link = i.find("div", {"class": "a-section aok-relative s-image-fixed-height"}).img["src"]
             flag = 0
