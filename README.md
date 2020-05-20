@@ -29,4 +29,33 @@ The Program Currently Checks Products and their prices available on the followin
     
     -Copy the Static Ip and paste it into the Browser
     
+    -Select the category & Search your desired product
+    
+    
+  # Categories and the sites that they scrape:
+        1)Mobiles
+                -amazon
+                -shopclues
+                -paytmmall
+                -flipkart
+                -croma
+        2)Headphones
+                -amazon
+                -flipkart
+                -snapdeal
+        3)Computer 
+                -mdcomputers
+                -amazon
+                -primeabgb
+                -vedantcomputers
+                -theitdepot
+         4)Shoes
+                -libertyshoesonline
+                -compare.byhatke
+                -fashos
+                -flipkart
+         5)Furniture
+                -amazon
+                -pepperfry
+    
  
