@@ -101,7 +101,7 @@ def flipkart(soup,part_name,site):
             img_link=item.find("div",{"class":"_3ZJShS _31bMyl"}).img['alt src'] 
             flag=0
             for value in part_name.split(" "):
-                if(value not in title.lower().split())
+                if(value not in title.lower().split()):
                 flag=1
                 break
             if(flag==0):
