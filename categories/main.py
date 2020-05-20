@@ -3,20 +3,21 @@ from bs4 import BeautifulSoup
 from dataclasses import dataclass
 import threading
 
-headers ={
-"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
 }
+
 
 @dataclass
 class Part():
     '''
     Class to Represent a Part from a given website
     '''
-    title:str
-    price:str
-    link:str
-    img_link:str
-    site:str
+    title: str
+    price: str
+    link: str
+    img_link: str
+    site: str
 
     def get_price(self):
         try:
@@ -27,30 +28,35 @@ class Part():
     def __str__(self):
         return(f"Part name: {self.title}\nPrice: {self.price}\nWebsite: {self.link}\nImage Link: {self.img_link}")
 
+
 def get_search_url(part_name, site, space_separator):
-    search_url = site.replace("item goes here",space_separator.join(part_name.split()))
+    search_url = site.replace(
+        "item goes here", space_separator.join(part_name.split()))
     return search_url
 
+
 def get_soup(url):
-    response = requests.get(url, headers = headers)
+    response = requests.get(url, headers=headers)
     if(response.status_code == requests.codes.ok):
         soup = BeautifulSoup(response.text, "lxml")
         return soup
     else:
         return
 
-def part_list_threading(site, part_name,space_separator, sites_part_list , file):
+
+def part_list_threading(site, part_name, space_separator, sites_part_list, file):
     search_url = get_search_url(part_name, site[1], space_separator)
     site_soup = get_soup(search_url)
     if(site_soup != None):
         temp_part_list = file.scrape_site(site[0], part_name, site_soup)
         part_list = []
         for part in temp_part_list:
-            part_list.append(Part(part[0],part[1],part[2],part[3],part[4]))
+            part_list.append(Part(part[0], part[1], part[2], part[3], part[4]))
     else:
         part_list = []
     sites_part_list.extend(part_list)
     return
+
 
 def sort_according_to_price(part_list):
     '''
@@ -69,6 +75,7 @@ def sort_according_to_price(part_list):
                 new_part_list.append(part_list.pop(part_list.index(item)))
     return new_part_list
 
+
 def get_part_list(part_name, part_cat):
     if(part_cat == "Computer Parts"):
         import categories.computer_parts
@@ -85,17 +92,18 @@ def get_part_list(part_name, part_cat):
     elif(part_cat == "Shoes"):
         import categories.shoes
         file = categories.shoes
-    #A list to store All the list of Part Objects
+    # A list to store All the list of Part Objects
     sites_part_list = []
-    #Creating List for Storing Threads for each site
+    # Creating List for Storing Threads for each site
     threads = []
-    for space_separator,url in file.parts_sites.items():
+    for space_separator, url in file.parts_sites.items():
         for a_site in url:
-            thread_obj = threading.Thread(target = part_list_threading, args = [a_site, part_name, space_separator, sites_part_list, file])
+            thread_obj = threading.Thread(target=part_list_threading, args=[
+                                          a_site, part_name, space_separator, sites_part_list, file])
             threads.append(thread_obj)
             thread_obj.start()
     for thread in threads:
-        #Waiting for all the threads to complete
+        # Waiting for all the threads to complete
         thread.join()
     sites_part_list = sort_according_to_price(sites_part_list)
     return sites_part_list
