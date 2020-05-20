@@ -92,6 +92,7 @@ def fashos(soup,part_name,site):
     return part_list
 
 def flipkart(soup,part_name,site):
+    results=soup.findAll("div",{"class":"IIdQZO _1SSAGr"})
     part_list=[]
     for item in results:
         try:
