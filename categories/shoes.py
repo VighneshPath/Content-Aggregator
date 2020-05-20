@@ -98,14 +98,14 @@ def flipkart(soup,part_name,site):
             title=item.find("div",{"class":"_2B_pmu"}).getText().strip()
             price=item.find("div",{"class":"_1uv9Cb"}).find("div",{"class":"_1vC4OE"}).getText().strip()
             link="https://www.flipkart.com/"+item.a['href'].strip()
-            img_link=item.find("div",{"class":"_3ZJShS _31bMyl"}).img['alt src'] 
+            # img_link=item.find("div",{"class":"_3ZJShS _31bMyl"}).img['alt src'] 
             flag=0
             for value in part_name.split(" "):
                 if(value not in title.lower().split()):
                     flag=1
                     break
             if(flag==0):
-                part_list.append((title,price,link,img_link,site))
+                part_list.append((title,price,link,site))
         except:
             continue  
     return part_list  
