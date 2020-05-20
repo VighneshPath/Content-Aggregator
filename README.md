@@ -1,11 +1,36 @@
 # Content-Aggregator
 A Simple Product Price Comparison Content Aggregator
 
-# Function
-The Program Currently Checks Products and their prices available on the following websites based on the categories:-
+# Features
 
+The Program Currently Checks Products and their Prices available on the following websites based on the categories:-
 
- # To Use Program
+        1)Mobiles
+                -amazon
+                -shopclues
+                -paytmmall
+                -flipkart
+                -croma
+        2)Headphones
+                -amazon
+                -flipkart
+                -snapdeal
+        3)Computer Parts
+                -mdcomputers
+                -amazon
+                -primeabgb
+                -vedantcomputers
+                -theitdepot
+         4)Shoes
+                -libertyshoesonline
+                -compare.byhatke
+                -fashos
+                -flipkart
+         5)Furniture
+                -amazon
+                -pepperfry
+ 
+ # Usage
  Follow the steps given:-
  
     -On Command Prompt type git clone https://github.com/VighneshPath/Content-Aggregator.git
@@ -22,32 +47,5 @@ The Program Currently Checks Products and their prices available on the followin
     
     -Select the category & Search your desired product
     
-    
-  # Categories and the sites that they scrape:
-        1)Mobiles
-                -amazon
-                -shopclues
-                -paytmmall
-                -flipkart
-                -croma
-        2)Headphones
-                -amazon
-                -flipkart
-                -snapdeal
-        3)Computer 
-                -mdcomputers
-                -amazon
-                -primeabgb
-                -vedantcomputers
-                -theitdepot
-         4)Shoes
-                -libertyshoesonline
-                -compare.byhatke
-                -fashos
-                -flipkart
-         5)Furniture
-                -amazon
-                -pepperfry
-                -flipkart
     
  
