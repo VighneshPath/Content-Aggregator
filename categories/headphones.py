@@ -38,15 +38,11 @@ def headphonezone(soup , part_name , site):
         try:
             result = item.find("div" , {"class":"product-details"})
 
-            title = result.find("span" , {"class":"title"})
-
-            price = result.find("span" , {"class":"money"})
-
             link = item.a["href"]
 
-			title = result.find("span" , {"class":"title"}).get_text().strip()
+            title = result.find("span" , {"class":"title"}).get_text().strip()
 
-			price = result.find("span" , {"class":"money"}).get_text().strip()
+			price = result.find("span" , {"class":"money"}).get_text().strip().replace("₹","Rs.")
 
             img = item.div.a["href"]
 
@@ -86,7 +82,7 @@ def flipkart(soup , part_name , site):
         try:
             title = result.find("a" , {"class":"_2cLu-l"}).get_text().strip()
 
-            price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()
+            price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()replace("₹","Rs.")
 
             link_ = result.find("a" , {"class":"Zhf2z-"})
             link = link_["href"]
@@ -159,7 +155,7 @@ def snapdeal(soup , part_name , site):
 
             title = result.a.p.get_text().strip()
 
-            price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()
+            price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()replace("₹","Rs.")
 
             img_ = item.find("img" , {"class":"product-image"})
             img = img_["src"]
