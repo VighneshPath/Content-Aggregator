@@ -4,16 +4,7 @@ A Simple Product Price Comparison Content Aggregator
 # Function
 The Program Currently Checks Products and their prices available on the following websites based on the categories:-
 
-### *Computer Parts:-*
 
-        -mdcomputers.in
-
-        -amazon.in
-
-        -primeabgb.com
-
-        -vedantcomputers.com
- 
  # To Use Program
  Follow the steps given:-
  
@@ -57,5 +48,6 @@ The Program Currently Checks Products and their prices available on the followin
          5)Furniture
                 -amazon
                 -pepperfry
+                -flipkart
     
  
