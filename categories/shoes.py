@@ -102,10 +102,10 @@ def flipkart(soup,part_name,site):
             flag=0
             for value in part_name.split(" "):
                 if(value not in title.lower().split()):
-                flag=1
-                break
+                    flag=1
+                    break
             if(flag==0):
-            part_list.append((title,price,link,img_link,site))
+                part_list.append((title,price,link,img_link,site))
         except:
             continue  
     return part_list  
