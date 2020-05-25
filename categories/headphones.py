@@ -64,22 +64,22 @@ def scrape_site(site, part_name, soup):
 
 
 def amazon(soup , part_name , site):
-	part_list = []
-	results = soup.findAll("div", {"class": "a-section a-spacing-medium"})
-	for result in results:
-		try:
-			title = result.find("span" , {"class":"a-size-medium a-color-base a-text-normal"}).get_text().strip()
+    part_list = []
+    results = soup.findAll("div", {"class": "a-section a-spacing-medium"})
+    for result in results:
+        try:
+            title = result.find("span" , {"class":"a-size-medium a-color-base a-text-normal"}).get_text().strip()
 
-			price = result.find("span", {"class": "a-offscreen"}).get_text().strip().replace("Rs.", "₹")
+            price = result.find("span", {"class": "a-offscreen"}).get_text().strip().replace("Rs.", "₹")
 
-			link = "https://amazon.in" + \
-				result.find("a", {"class": "a-link-normal a-text-normal"})['href'].strip()
+            link = "https://amazon.in" + \
+                result.find("a", {"class": "a-link-normal a-text-normal"})['href'].strip()
 
-			img = result.find("div", {"class": "a-section aok-relative s-image-fixed-height"}).img["src"]
+            img = result.find("div", {"class": "a-section aok-relative s-image-fixed-height"}).img["src"]
 
-			flag = 0
-
+            flag = 0
             for word in part_name.split(" "):
+
                 if(word not in title.lower().split()):
                     flag = 1
                     break
@@ -87,10 +87,13 @@ def amazon(soup , part_name , site):
                     part_list.append((title,price,link,img,site))
 
 
+
+
         except:
             continue
 
     return part_list
+
 
 
 
@@ -117,16 +120,16 @@ def flipkart(soup , part_name , site):
         try:
             title = result.find("a" , {"class":"_2cLu-l"}).get_text().strip()
 
-            price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip()replace("Rs.","₹")
+            price = result.find("div" , {"class":"_1vC4OE"}).get_text().strip().replace("Rs.","₹")
 
             link_ = result.find("a" , {"class":"Zhf2z-"})
             link = link_["href"]
 
-			img_ = result.find("a" , {"class":"Zhf2z-"})
-			img = img_["href"]
-			
-			link_ = result.find("a" , {"class":"_2cLu-l"})
-			link = link_["href"]
+            img_ = result.find("a" , {"class":"Zhf2z-"})
+            img = img_["href"]
+
+            link_ = result.find("a" , {"class":"_2cLu-l"})
+            link = link_["href"]
 
             flag = 0
 
@@ -139,6 +142,7 @@ def flipkart(soup , part_name , site):
         except:
             continue
     return part_list
+
 
 # # SANPDEAL
 
@@ -190,7 +194,7 @@ def snapdeal(soup , part_name , site):
 
             title = result.a.p.get_text().strip()
 
-            price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip()replace("Rs.","₹")
+            price = result.find("span" , {"class":"lfloat product-price"}).get_text().strip().replace("Rs.","₹")
 
             img_ = item.find("img" , {"class":"product-image"})
             img = img_["src"]
