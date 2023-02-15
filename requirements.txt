@@ -3,4 +3,4 @@ bs4
 lxml
 flask
 flask_session
-werkzeug==0.16.0
+werkzeug==2.2.3
